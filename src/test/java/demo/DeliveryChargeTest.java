@@ -6,14 +6,21 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class DeliveryManagerTest {
+class DeliveryChargeTest {
   @Test
   public void 商品の合計金額が2000円未満の場合_配送料は500円() {
     var products = List.of(
         new Product(1, "商品A", 500),
         new Product(2, "商品B", 1499)
     );
-    assertEquals(500, DeliveryManager.deliveryCharge(products));
+
+    var cart = new ShoppingCart();
+    for (var elem : products) {
+      cart = cart.add(elem);
+    }
+    var charge = new DeliveryCharge(cart);
+
+    assertEquals(500, charge.amount);
   }
 
   @Test
@@ -22,6 +29,13 @@ class DeliveryManagerTest {
         new Product(1, "商品A", 500),
         new Product(2, "商品B", 1500)
     );
-    assertEquals(0, DeliveryManager.deliveryCharge(products));
+
+    var cart = new ShoppingCart();
+    for (var elem : products) {
+      cart = cart.add(elem);
+    }
+    var charge = new DeliveryCharge(cart);
+
+    assertEquals(0, charge.amount);
   }
 }
