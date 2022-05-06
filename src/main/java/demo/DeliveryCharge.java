@@ -5,14 +5,27 @@ public class DeliveryCharge {
   private static final int PAY_CHARGE = 500;
   private static final int CHARGE_FREE = 0;
 
-  final int amount;
-
-  public DeliveryCharge(ShoppingCart cart) {
+  public static DeliveryCharge from(ShoppingCart cart) {
     int totalPrice = cart.totalPrice();
-    if (totalPrice < CHARGE_FREE_THRESHOLD) {
-      amount = PAY_CHARGE;
+    if (fulfillChargeFreeCondition(totalPrice)) {
+      return new DeliveryCharge(CHARGE_FREE);
     } else {
-      amount = CHARGE_FREE;
+      return new DeliveryCharge(PAY_CHARGE);
     }
   }
+
+  private static boolean fulfillChargeFreeCondition(int totalPrice) {
+    return totalPrice >= CHARGE_FREE_THRESHOLD;
+  }
+
+  private final int amount;
+
+  private DeliveryCharge(int amount) {
+    this.amount = amount;
+  }
+
+  public int amount() {
+    return amount;
+  }
+
 }

@@ -10,9 +10,9 @@ class DeliveryChargeTest {
     var cart = new ShoppingCart();
     cart = cart.add(new Product(1, "商品A", 500));
     cart = cart.add(new Product(2, "商品B", 1499));
-    var charge = new DeliveryCharge(cart);
+    var charge = DeliveryCharge.from(cart);
 
-    assertEquals(500, charge.amount);
+    assertEquals(500, charge.amount());
   }
 
   @Test
@@ -20,8 +20,8 @@ class DeliveryChargeTest {
     var cart = new ShoppingCart();
     cart = cart.add(new Product(1, "商品A", 500));
     cart = cart.add(new Product(2, "商品B", 1500));
-    var charge = new DeliveryCharge(cart);
+    var charge = DeliveryCharge.from(cart);
 
-    assertEquals(0, charge.amount);
+    assertEquals(0, charge.amount());
   }
 }

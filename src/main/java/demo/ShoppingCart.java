@@ -21,6 +21,6 @@ public class ShoppingCart {
   }
 
   public int totalPrice() {
-    return products.stream().mapToInt(product -> product.price).sum();
+    return products.stream().mapToInt(Product::price).sum();
   }
 }
