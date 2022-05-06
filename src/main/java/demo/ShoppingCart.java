@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShoppingCart {
-  final List<Product> products;
+  private final List<Product> products;
 
   public ShoppingCart() {
     products = new ArrayList<>();
@@ -18,5 +18,9 @@ public class ShoppingCart {
     var adding = new ArrayList<>(products);
     adding.add(product);
     return new ShoppingCart(adding);
+  }
+
+  public int totalPrice() {
+    return products.stream().mapToInt(product -> product.price).sum();
   }
 }

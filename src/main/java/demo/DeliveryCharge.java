@@ -5,10 +5,7 @@ public class DeliveryCharge {
 
   public DeliveryCharge(ShoppingCart cart) {
     int charge = 0;
-    int totalPrice = 0;
-    for (Product each : cart.products) {
-      totalPrice += each.price;
-    }
+    int totalPrice = cart.totalPrice();
     if (totalPrice < 2000) {
       charge = 500;
     } else {
